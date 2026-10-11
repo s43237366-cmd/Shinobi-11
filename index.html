@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Шиноби — Нинзяи овозии дониш</title>
+<meta name="description" content="Шиноби: питомеци виртуалӣ, ки гапатонро мешунавад, ҷавоб медиҳад ва қаҳва металабад.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥷</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080b1b;--bd:#ffffff1a;--tx:#eef0ff;--mut:#9aa0c8;--ac:#8b7bff;--sh:#e9e6ff;--hot:#ff8a65;--ok:#5df2b0}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(900px 520px at 10% -5%,#4a2fb455,transparent),radial-gradient(800px 500px at 100% 100%,#ff8a6522,transparent),var(--bg);color:var(--tx);font:500 15px/1.5 Manrope,system-ui,sans-serif;min-height:100vh}
+h1,h2,.logo{font-family:Sora,system-ui,sans-serif}
+.hd{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:12px 22px;background:#080b1bcc;backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+.logo{font-weight:800;font-size:19px;white-space:nowrap}
+nav{display:flex;gap:4px;flex:1;overflow-x:auto;scrollbar-width:none}
+.tab{background:none;border:0;color:var(--mut);font:700 14px Manrope,sans-serif;padding:8px 14px;border-radius:12px;cursor:pointer;white-space:nowrap}
+.tab:hover{color:#fff}.tab.on{background:#ffffff14;color:#fff}
+.pill{background:#ffffff12;border:1px solid var(--bd);border-radius:20px;padding:5px 12px;font-weight:700;font-size:13px;white-space:nowrap}
+.hero{max-width:1080px;margin:28px auto 6px;padding:0 20px}
+.hero h1{font-size:clamp(26px,4.4vw,42px);letter-spacing:-.03em;line-height:1.1;max-width:720px}
+.hero p{color:var(--mut);margin-top:10px;max-width:620px}
+.grid{max-width:1080px;margin:20px auto;padding:0 20px;display:grid;grid-template-columns:minmax(300px,430px) 1fr;gap:22px;align-items:start}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+.card{background:linear-gradient(160deg,#ffffff10,#ffffff06);border:1px solid var(--bd);border-radius:26px;padding:20px;box-shadow:0 20px 50px #0006}
+.stage{position:relative;text-align:center}
+.chip{position:absolute;top:16px;left:16px;font-weight:700;font-size:13px;background:#ffffff14;border-radius:14px;padding:4px 12px;z-index:2}
+.bubble{min-height:46px;margin:30px auto 0;max-width:88%;background:#fff;color:#171a3a;font-weight:700;padding:9px 16px;border-radius:18px;position:relative;font-size:14px}
+.bubble::after{content:"";position:absolute;bottom:-9px;left:50%;margin-left:-9px;border:9px solid transparent;border-top-color:#fff;border-bottom:0}
+#bot{width:100%;max-width:320px;cursor:pointer;touch-action:manipulation;filter:drop-shadow(0 0 40px color-mix(in srgb,var(--ac) 40%,transparent));-webkit-tap-highlight-color:transparent}
+#rig{animation:fl 3.2s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-9px)}}
+.hit #rig{animation:hit .5s}
+@keyframes hit{20%{transform:translate(-9px,3px) rotate(-3deg)}50%{transform:translate(9px,0) rotate(3deg)}80%{transform:translate(-4px,0)}}
+.angry #rig{animation:sh .3s linear infinite}
+@keyframes sh{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.sleep #rig{animation:br 4s ease-in-out infinite}
+@keyframes br{50%{transform:scale(1.025) translateY(3px)}}
+.eye{transform-box:fill-box;transform-origin:center;animation:bl 4.6s infinite}
+@keyframes bl{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.08)}}
+#aL,#aR{transform-box:fill-box;transform-origin:50% 8%;transition:transform .3s}
+.happy #aR{animation:wv .5s ease-in-out infinite alternate}
+@keyframes wv{from{transform:rotate(-8deg)}to{transform:rotate(-55deg)}}
+.tired #aL,.tired #aR{transform:rotate(0)}
+#pulse{stroke-dasharray:6 3;animation:pl 1.2s linear infinite}
+@keyframes pl{to{stroke-dashoffset:-18}}
+.fx{position:absolute;font-size:28px;pointer-events:none;animation:up 1.4s ease-out forwards;z-index:5}
+@keyframes up{to{transform:translateY(-120px) scale(1.3);opacity:0}}
+.meters{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin:6px 0 16px;text-align:left}
+.meters div{font-size:12.5px;color:var(--mut)}.meters b{float:right;color:#fff}
+.meters .t{height:9px;background:#0007;border-radius:6px;overflow:hidden;margin-top:4px}.meters i{display:block;height:100%;border-radius:6px;transition:width .4s,background .4s}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+@media(max-width:420px){.acts{grid-template-columns:1fr 1fr}}
+.btn{border:1px solid var(--bd);background:#ffffff10;color:#fff;border-radius:18px;padding:11px 4px;font:700 12.5px Manrope,sans-serif;cursor:pointer;display:flex;flex-direction:column;gap:3px;align-items:center;transition:.15s}
+.btn span{font-size:25px;line-height:1}
+.btn:hover{background:#ffffff1e;transform:translateY(-2px)}.btn:active{transform:scale(.95)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
+.pane{display:none}.pane.on{display:block}
+.card h2{font-size:20px;margin-bottom:4px}.sub{color:var(--mut);font-size:13.5px;margin-bottom:14px}
+#msgs{height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:4px 2px 8px}
+.m{max-width:82%;padding:9px 14px;border-radius:16px;font-size:14.5px}
+.m.u{align-self:flex-end;background:var(--ac);color:#10102a;font-weight:700;border-bottom-right-radius:4px}
+.m.b{align-self:flex-start;background:#ffffff14;border-bottom-left-radius:4px}
+.row{display:flex;gap:8px;margin-top:8px}
+input,select{background:#0007;border:1px solid var(--bd);border-radius:14px;color:#fff;padding:11px 14px;font:inherit;min-width:0}
+input{flex:1}
+.go{background:var(--ac);color:#10102a;border:0;border-radius:14px;padding:0 18px;font:800 14px Manrope,sans-serif;cursor:pointer}
+.mic{width:48px;border-radius:50%;border:0;background:var(--hot);font-size:20px;cursor:pointer;flex:none;height:48px}
+.mic.on{animation:pu 1s infinite}
+@keyframes pu{0%{box-shadow:0 0 0 0 #ff8a65aa}100%{box-shadow:0 0 0 18px #0000}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips button{background:#ffffff0f;border:1px solid var(--bd);color:var(--mut);border-radius:16px;padding:5px 11px;font:600 12.5px Manrope;cursor:pointer}.chips button:hover{color:#fff}
+#arena{position:relative;height:290px;border-radius:20px;background:#0006;border:1px dashed var(--bd);overflow:hidden;margin:10px 0}
+.bug{position:absolute;font-size:34px;cursor:pointer;user-select:none;animation:pop .2s}
+@keyframes pop{from{transform:scale(0)}}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.it{background:#ffffff0c;border:1px solid var(--bd);border-radius:18px;padding:14px;text-align:center}
+.it.lock{opacity:.45}.it .e{font-size:30px}.it small{display:block;color:var(--mut);font-size:12px}
+.it .b2{margin-top:8px;background:#ffffff1a;border:0;color:#fff;border-radius:12px;padding:6px 12px;font:700 12.5px Manrope;cursor:pointer}
+.sw{width:42px;height:42px;border-radius:50%;margin:0 auto 6px;border:3px solid #fff4}
+.it.cur{border-color:var(--ok)}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kp div{background:#ffffff0c;border-radius:16px;padding:12px;text-align:center}.kp b{display:block;font:800 22px Sora}.kp span{font-size:12px;color:var(--mut)}
+#spark{width:100%;height:90px;background:#0005;border-radius:16px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);background:#fff;color:#171a3a;font-weight:800;padding:12px 20px;border-radius:16px;z-index:50;transition:.4s;box-shadow:0 10px 30px #0008}
+.toast.on{transform:translateX(-50%)}
+.tools{display:flex;gap:8px;margin-top:12px;justify-content:center}.tools button{background:none;border:1px solid var(--bd);color:var(--mut);border-radius:16px;padding:6px 14px;font:600 13px Manrope;cursor:pointer}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:26px 20px 40px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.talking #aL{animation:wv4 .6s ease-in-out infinite alternate}.talking #aR{animation:wv .5s ease-in-out infinite alternate}
+.wave #aR{animation:wv3 .45s ease-in-out infinite alternate}
+@keyframes wv3{from{transform:rotate(-15deg)}to{transform:rotate(-125deg)}}
+@keyframes wv4{from{transform:rotate(8deg)}to{transform:rotate(38deg)}}
+.wel{position:fixed;inset:0;background:#05071be6;backdrop-filter:blur(10px);display:none;place-items:center;z-index:60;padding:20px}.wel.on{display:grid}
+.wc{background:linear-gradient(160deg,#1c1f45,#10132e);border:1px solid var(--bd);border-radius:28px;padding:30px;max-width:420px;text-align:center;box-shadow:0 30px 80px #000a}
+.qo{display:block;width:100%;text-align:left;background:#ffffff10;border:1px solid var(--bd);color:#fff;border-radius:14px;padding:12px 16px;margin-bottom:8px;font:700 14.5px Manrope,sans-serif;cursor:pointer}.qo:hover{background:#ffffff1c}.qo.ok{background:#1f7a52}.qo.no{background:#8a2a3a}
+.ml{max-height:230px;overflow-y:auto;margin:10px 0 4px}
+</style>
+</head>
+<body>
+<header class="hd">
+  <div class="logo">🥷 Шиноби</div>
+  <nav id="nav">
+    <button class="tab on" data-t="chat">🎙 Гуфтугӯ</button><button class="tab" data-t="game">🎮 Бозӣ</button><button class="tab" data-t="shop">🛍 Мағоза</button><button class="tab" data-t="ach">🏆 Дастовардҳо</button><button class="tab" data-t="stat">📈 Омор</button><button class="tab" data-t="quiz">🧪 Викторина</button><button class="tab" data-t="mem">🧠 Хотира</button><button class="tab" data-t="about">ℹ️ Дар бораи</button>
+  </nav>
+  <div class="pill" id="coins">🪙 0</div><div class="pill" id="lvl">LV 1</div>
+</header>
+
+<div class="hero">
+  <h1>Нинзяи рақамӣ, ки номатро дар хотир мегирад.</h1>
+  <p>Номатро мепурсад ва ҳар чизеро, ки бигӯед, дар хотир мегирад. Гапатро мешунавад, илм меомӯзонад ва даст меҷунбонад. Вақте энергияаш кам шавад, қаҳва металабад.</p>
+</div>
+
+<div class="grid">
+  <section class="card stage" id="stage">
+    <div class="chip" id="state">—</div>
+    <div class="bubble" id="bubble">Салом, девелопер!</div>
+    <svg id="bot" viewBox="0 0 300 350" role="img" aria-label="Нинзя-питомец. Ба ӯ зарба занед">
+      <defs>
+        <radialGradient id="sk" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#ffe6cf"/><stop offset=".6" stop-color="#f4be93"/><stop offset="1" stop-color="#d8956a"/></radialGradient>
+        <linearGradient id="su" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--ac)"/><stop offset="1" style="stop-color:color-mix(in srgb,var(--ac) 45%,#0a0a20)"/></linearGradient>
+        <linearGradient id="hr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6fc0"/><stop offset="1" stop-color="#1c2350"/></linearGradient>
+        <linearGradient id="mt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1f3fb"/><stop offset="1" stop-color="#7f8bb0"/></linearGradient>
+        <filter id="gl"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <ellipse cx="150" cy="340" rx="90" ry="9" fill="#000" opacity=".45"/>
+      <g id="rig">
+        <circle id="ant" cx="150" cy="12" r="8" fill="#3de0ff" filter="url(#gl)"/>
+        <rect x="110" y="296" width="32" height="38" rx="12" fill="#1c2350"/><rect x="158" y="296" width="32" height="38" rx="12" fill="#1c2350"/>
+        <ellipse cx="124" cy="334" rx="21" ry="8" fill="#10152f"/><ellipse cx="176" cy="334" rx="21" ry="8" fill="#10152f"/>
+        <rect x="92" y="204" width="116" height="96" rx="32" fill="url(#su)" stroke="#0c1030" stroke-opacity=".5" stroke-width="2.5"/>
+        <path d="M122 206 L150 252 L178 206" fill="none" stroke="#0c1030" stroke-opacity=".35" stroke-width="3"/>
+        <rect x="92" y="268" width="116" height="14" rx="7" fill="#1c2350"/><rect x="141" y="265" width="18" height="20" rx="4" fill="url(#mt)" stroke="#5b6688" stroke-width="1.5"/>
+        <polyline id="pulse" points="116,240 132,240 140,226 150,256 160,232 168,240 184,240" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <g id="aL"><rect x="64" y="212" width="28" height="74" rx="14" fill="url(#su)"/><rect x="64" y="266" width="28" height="10" fill="#1c2350"/><circle cx="78" cy="292" r="13" fill="url(#sk)"/></g>
+        <g id="aR"><rect x="208" y="212" width="28" height="74" rx="14" fill="url(#su)"/><rect x="208" y="266" width="28" height="10" fill="#1c2350"/><circle cx="222" cy="292" r="13" fill="url(#sk)"/></g>
+        <rect x="136" y="184" width="28" height="24" rx="8" fill="#d8956a"/>
+        <circle cx="84" cy="130" r="11" fill="url(#sk)"/><circle cx="216" cy="130" r="11" fill="url(#sk)"/>
+        <ellipse cx="150" cy="124" rx="66" ry="68" fill="url(#sk)" stroke="#a8683f" stroke-opacity=".5" stroke-width="2"/>
+        <path d="M82 108 L70 70 L98 84 L102 44 L126 72 L150 26 L174 72 L198 44 L202 84 L230 70 L218 108 Q150 70 82 108Z" fill="url(#hr)" stroke="#0e1236" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M126 72 L150 36 L164 70M100 82 L104 52" fill="none" stroke="#9fb0ee" stroke-width="2" opacity=".55" stroke-linecap="round"/>
+        <rect x="82" y="96" width="136" height="22" rx="8" fill="#1c2350" stroke="#0e1236" stroke-width="2"/>
+        <rect x="118" y="93" width="64" height="28" rx="7" fill="url(#mt)" stroke="#5b6688" stroke-width="2"/>
+        <circle cx="150" cy="107" r="7" fill="none" stroke="#5b6688" stroke-width="2.5"/><circle cx="150" cy="107" r="2.2" fill="#5b6688"/>
+        <g id="eyes">
+          <ellipse class="eye" id="eL" cx="116" cy="142" rx="17" ry="20" fill="#3de0ff" stroke="#1b1030" stroke-width="3"/><circle id="hL" cx="110" cy="134" r="5" fill="#fff" opacity=".9"/>
+          <ellipse class="eye" id="eR" cx="184" cy="142" rx="17" ry="20" fill="#3de0ff" stroke="#1b1030" stroke-width="3"/><circle id="hR" cx="178" cy="134" r="5" fill="#fff" opacity=".9"/>
+        </g>
+        <line id="brL" x1="98" y1="122" x2="132" y2="132" stroke="#3a1c2c" stroke-width="6" stroke-linecap="round" opacity="0"/>
+        <line id="brR" x1="202" y1="122" x2="168" y2="132" stroke="#3a1c2c" stroke-width="6" stroke-linecap="round" opacity="0"/>
+        <path d="M148 158 Q150 162 152 158" fill="none" stroke="#b97a55" stroke-width="2.5" stroke-linecap="round"/>
+        <circle id="chL" cx="98" cy="162" r="9" fill="#ff7f8f" opacity="0"/><circle id="chR" cx="202" cy="162" r="9" fill="#ff7f8f" opacity="0"/>
+        <path id="mouth" d="M128 168 Q150 190 172 168" fill="none" stroke="#6b2f2f" stroke-width="5" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <div class="meters" id="meters"></div>
+    <div class="acts">
+      <button class="btn" data-a="coffee"><span>☕️</span>Қаҳва</button>
+      <button class="btn" data-a="code"><span>💻</span>Навиштани код</button>
+      <button class="btn" data-a="fix"><span>🐛</span>Ислоҳи багҳо</button>
+      <button class="btn" data-a="sleep"><span>😴</span>Хоб</button>
+    </div>
+    <div class="tools"><button id="live">🎧 Гуфтугӯи зинда</button><button id="fact">💡 Далел</button><button id="mute">🔊 Садо</button><button id="reset">↺ Аз нав</button></div>
+  </section>
+
+  <section class="card">
+    <div class="pane on" id="p-chat">
+      <h2>Гуфтугӯ бо Шиноби</h2>
+      <p class="sub">Тугмаи 🎤-ро як бор пахш кунед: ӯ ҳамеша гӯш мекунад ва пас аз ҳар ҷавоб боз гӯш мекунад. Дубора пахш кунед, то қатъ шавад. Ё матн нависед. Бипурсед: вақт, шӯхӣ, ҳисоб (12*7), ё бигӯед «қаҳва деҳ».</p>
+      <div id="msgs"></div>
+      <div class="row">
+        <button class="mic" id="mic" aria-label="Гуфтан">🎤</button>
+        <input id="txt" placeholder="Ба Шиноби чизе бинависед..." autocomplete="off">
+        <button class="go" id="send">Фиристодан</button>
+      </div>
+      <div class="row"><select id="lang" aria-label="Забон"><option value="tg-TJ">Тоҷикӣ</option><option value="ru-RU">Русский</option><option value="en-US">English</option></select></div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div class="pane" id="p-game">
+      <h2>Овардани бағҳо</h2>
+      <p class="sub">20 сония вақт доред. Ба ҳар 🐛 зуд зарба занед. Ҳар зарба 1 танга меорад. Бозӣ 10 энергия мегирад.</p>
+      <div class="row" style="justify-content:space-between"><b id="gs">Хол: 0</b><b id="gt">20с</b><b id="gb">Беҳтарин: 0</b></div>
+      <div id="arena"></div>
+      <button class="go" id="gstart" style="height:46px;width:100%">▶ Оғози бозӣ</button>
+    </div>
+
+    <div class="pane" id="p-shop">
+      <h2>Мағоза</h2><p class="sub">Бо тангаҳои бозӣ ва кор рангҳои нави Шинобиро харед.</p>
+      <div class="list" id="skins"></div>
+    </div>
+
+    <div class="pane" id="p-ach">
+      <h2>Дастовардҳо</h2><p class="sub" id="achc"></p>
+      <div class="list" id="achs"></div>
+    </div>
+
+    <div class="pane" id="p-stat">
+      <h2>Омор</h2><p class="sub">Фаъолияти шумо ва ҳолати умумии Шиноби дар дақиқаҳои охир.</p>
+      <div class="kp" id="kp"></div>
+      <svg id="spark" viewBox="0 0 300 90" preserveAspectRatio="none"><polyline id="line" fill="none" stroke="#8b7bff" stroke-width="2.5" stroke-linejoin="round"/></svg>
+    </div>
+
+    <div class="pane" id="p-quiz">
+      <h2>Викторинаи илмӣ</h2><p class="sub">5 савол дар бораи илм, таърих ва барномасозӣ. Ҳар ҷавоби дуруст 5 танга меорад.</p>
+      <div id="qz"></div>
+    </div>
+
+    <div class="pane" id="p-mem">
+      <h2>Хотира</h2><p class="sub">Ҳар чизе ки гуфтед, дар ин ҷо нигоҳ дошта мешавад. Бигӯед: «ман 15 сола ҳастам», «ман аз Душанбе», «дар хотир дор: ...».</p>
+      <div class="kp" id="mf"></div>
+      <div class="ml" id="ml"></div>
+      <div class="row"><input id="bn" maxlength="20" placeholder="Номи питомец"><button class="go" id="bnb">Номгузорӣ</button></div>
+      <div class="row"><button class="go" id="clr" style="background:#ffffff1a;color:#fff;height:42px;width:100%">🗑 Тоза кардани хотира</button></div>
+    </div>
+
+    <div class="pane" id="p-about">
+      <h2>Дар бораи лоиҳа</h2>
+      <p class="sub">Шиноби барои озмуни «AI-Питомец» сохта шудааст.</p>
+      <p>Нишондиҳандаҳо бо гузашти вақт кам мешаванд: қаҳва, энергия, кайфият ва сифати код. Бағҳо кайфиятро бад мекунанд, қаҳва энергияро барқарор мекунад, хоб ҳамаро ҷойгузин мекунад.</p>
+      <p style="margin-top:10px">Бо ӯ гап занед: шиносоии овоз ва гуфтори овозӣ дар Chrome / Edge / Safari кор мекунад. Ба Шиноби даст занед: ӯ аз дард «оҳ» мекашад ва агар зиёд занед, асабӣ мешавад.</p>
+      <p style="margin-top:10px;color:var(--mut)">Технологияҳо: HTML, CSS, SVG, JavaScript, Web Speech API, Web Audio API.</p>
+    </div>
+  </section>
+</div>
+<footer>© 2026 Шиноби · Сохта бо ❤️ ва кофеин</footer>
+<div class="wel" id="welcome"><div class="wc"><div style="font-size:54px">🥷</div><h2>Салом! Ман Шиноби.</h2><p class="sub">Номи ту чист? Ман онро дар хотир мегирам ва ҳамеша бо номат туро садо мезанам.</p><div class="row"><input id="nm" maxlength="24" placeholder="Номатро нависед..." autocomplete="off"><button class="go" id="okn" style="height:46px">Хуб</button></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const DEF={name:'',bn:'Шиноби',facts:{likes:[],notes:[]},mem:[],energy:80,mood:80,quality:40,coffee:70,bugs:2,xp:0,coins:0,sleep:0,t:0,skin:'v',own:['v'],ach:{},st:{coffee:0,code:0,fixes:0,hits:0,chats:0,best:0},hist:[]};
+let S=JSON.parse(JSON.stringify(DEF));
+try{const x=JSON.parse(localStorage.getItem('bb2'));if(x)S={...DEF,...x,st:{...DEF.st,...x.st}}}catch(e){}
+S.facts=JSON.parse(JSON.stringify({likes:[],notes:[],...S.facts}));S.mem=[...(S.mem||[])];
+const save=()=>{try{localStorage.setItem('bb2',JSON.stringify(S))}catch(e){}};
+const cl=v=>Math.max(0,Math.min(100,v)),rnd=a=>a[Math.random()*a.length|0];
+
+/* ---------- sound & voice ---------- */
+let muted=false,ac;
+function beep(f,d=.12,ty='square',v=.05,to){if(muted)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.type=ty;o.frequency.setValueAtTime(f,ac.currentTime);if(to)o.frequency.exponentialRampToValueAtTime(to,ac.currentTime+d);g.gain.setValueAtTime(v,ac.currentTime);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+d);o.connect(g).connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+const SND={coffee:()=>{beep(520,.1);setTimeout(()=>beep(800,.16),90)},code:()=>[0,60,120,180].forEach((t,i)=>setTimeout(()=>beep(300+i*40,.05,'square',.04),t)),fix:()=>{beep(400,.1,'triangle');setTimeout(()=>beep(620,.1,'triangle'),100);setTimeout(()=>beep(900,.2,'triangle'),200)},sleep:()=>beep(500,.6,'sine',.06,170),deny:()=>beep(150,.15,'sawtooth'),ouch:()=>beep(700,.18,'sawtooth',.06,180),win:()=>[0,90,180].forEach((t,i)=>setTimeout(()=>beep(600+i*200,.15,'triangle'),t))};
+const OPEN='M138 160 Q150 154 162 160 Q170 182 150 188 Q130 182 138 160Z';
+let talking=false,tInt;
+function talkOn(){if(talking)return;talking=true;if(live)stopRec();$('#stage').classList.add('talking');let o=0;tInt=setInterval(()=>{o=!o;const m=$('#mouth');m.setAttribute('d',o?OPEN:LOOKS[look].m);m.setAttribute('fill',o?'#ff9bb0':'none')},130)}
+function talkOff(){talking=false;if(live)setTimeout(startRec,500);$('#stage').classList.remove('talking');clearInterval(tInt);const m=$('#mouth');m.setAttribute('d',LOOKS[look].m);m.setAttribute('fill','none')}
+function speak(text){
+  talkOn();const ms=Math.min(6000,600+text.length*65);
+  if(muted||!window.speechSynthesis){setTimeout(talkOff,ms);return}
+  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text.replace(/[^\p{L}\p{N}\s.,!?+\-=:]/gu,''));
+    const L=$('#lang').value,v=speechSynthesis.getVoices();
+    const vo=v.find(x=>x.lang.startsWith(L.slice(0,2)))||v.find(x=>x.lang.startsWith('ru'));
+    u.lang=vo?vo.lang:'ru-RU';if(vo)u.voice=vo;u.pitch=1.5;u.rate=1.05;u.onend=talkOff;u.onerror=talkOff;speechSynthesis.speak(u);setTimeout(()=>{if(talking&&!speechSynthesis.speaking)talkOff()},ms+1500)}catch(e){setTimeout(talkOff,ms)}
+}
+function say(t,voice=false,raw=false){if(voice&&!raw&&S.name&&Math.random()<.6)t=N0(t);$('#bubble').textContent=t;if(voice)speak(t)}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e.h);e.h=setTimeout(()=>e.classList.remove('on'),2800)}
+function fx(e){const s=$('#stage'),n=document.createElement('span');n.className='fx';n.textContent=e;n.style.left=(25+Math.random()*50)+'%';n.style.top=(30+Math.random()*25)+'%';s.appendChild(n);setTimeout(()=>n.remove(),1400)}
+
+/* ---------- mood engine ---------- */
+const LOOKS={
+ happy:{c:'happy',rx:17,ry:21,m:'M126 160 Q150 190 174 160',br:0,ch:.55,col:'#5df2b0',t:'Хурсанд 😄'},
+ neutral:{c:'',rx:17,ry:20,m:'M134 168 L166 168',br:0,ch:0,col:'#3de0ff',t:'Оддӣ 🙂'},
+ tired:{c:'tired',rx:17,ry:7,m:'M132 174 Q150 160 168 174',br:0,ch:0,col:'#ffd166',t:'Хаста 😮‍💨'},
+ angry:{c:'angry',rx:17,ry:13,m:'M130 176 Q150 152 170 176',br:1,ch:0,col:'#ff5470',t:'Асабӣ 😠'},
+ sleep:{c:'sleep',rx:17,ry:2,m:'M143 166 Q150 172 157 166',br:0,ch:.3,col:'#8b7bff',t:'Хоб 😴'},
+ hurt:{c:'hit',rx:19,ry:24,m:'M138 170 Q150 160 162 170',br:0,ch:0,col:'#ffffff',t:'Оҳ! 😵'},
+ listen:{c:'',rx:19,ry:22,m:'M138 166 L162 166',br:0,ch:.2,col:'#3de0ff',t:'Гӯш мекунам 👂'}
+};
+let look='',temp=null;
+function moodKey(){
+ if(temp&&Date.now()<temp.u)return temp.k;
+ if(S.sleep>0)return'sleep';
+ if(S.energy<22||S.coffee<8)return'tired';
+ if(S.mood<30||S.bugs>=8)return'angry';
+ return(S.energy+S.mood+S.coffee)/3>62?'happy':'neutral';
+}
+function setTemp(k,ms){temp={k,u:Date.now()+ms};setTimeout(render,ms+30);render()}
+const M=[['energy','⚡','Энергия'],['mood','😊','Кайфият'],['quality','✨','Сифати код'],['coffee','☕️','Қаҳва']];
+$('#meters').innerHTML=M.map(([k,e,n])=>`<div>${e} ${n}<b id="v-${k}"></b><div class="t"><i id="b-${k}"></i></div></div>`).join('');
+let lastLv=Math.floor(S.xp/60)+1;
+function render(){
+ M.forEach(([k])=>{const v=Math.round(S[k]);$('#v-'+k).textContent=v+'%';const b=$('#b-'+k);b.style.width=v+'%';b.style.background=`hsl(${v*1.15} 85% 58%)`});
+ const lv=Math.floor(S.xp/60)+1;$('#lvl').textContent='LV '+lv;$('#coins').textContent='🪙 '+S.coins;
+ if(lv>lastLv){lastLv=lv;toast('🎉 Сатҳи нав: LV '+lv);SND.win()}
+ const k=moodKey();
+ if(k!==look){look=k;const L=LOOKS[k];$('#bot').setAttribute('class',L.c);
+  ['eL','eR'].forEach(i=>{const e=$('#'+i);e.setAttribute('rx',L.rx);e.setAttribute('ry',L.ry);e.setAttribute('fill',L.col)});
+  ['hL','hR'].forEach(i=>$('#'+i).setAttribute('opacity',L.ry<5?0:.9));
+  $('#brL').setAttribute('opacity',L.br);$('#brR').setAttribute('opacity',L.br);$('#chL').setAttribute('opacity',L.ch);$('#chR').setAttribute('opacity',L.ch);
+  $('#mouth').setAttribute('stroke','#6b2f2f');$('#ant').style.fill=L.col;$('#state').textContent=L.t;if(!talking)$('#mouth').setAttribute('d',L.m)}
+ $$('.acts .btn').forEach(b=>b.disabled=S.sleep>0);
+ checkAch();
+}
+
+/* ---------- actions ---------- */
+const ACT={
+ coffee(){if(S.coffee>95){say('Қаҳва кифоя! Дилам тез мезанад ☕',1);SND.deny();return}S.coffee=cl(S.coffee+28);S.energy=cl(S.energy+14);S.mood=cl(S.mood+4);S.st.coffee++;say(rnd(['Ммм... қаҳваи болаззат!','Раҳмат! Акнун метавонам кор кунам!']),1);fx('☕️');SND.coffee()},
+ code(){if(S.energy<12){say('Энергияам нест. Аввал қаҳва деҳ!',1);SND.deny();return}S.quality=cl(S.quality+11);S.energy=cl(S.energy-16);S.coffee=cl(S.coffee-8);S.bugs=Math.min(10,S.bugs+(Math.random()<.7?1:0));S.xp+=10;S.coins+=2;S.st.code++;say(rnd(['git commit -m "fix"','Функсия тайёр шуд!','npm run build ✓','Код менависам...']));fx('💻');SND.code()},
+ fix(){if(!S.bugs){say('Бағ нест! Код тоза аст ✨');SND.deny();return}S.bugs=Math.max(0,S.bugs-2);S.mood=cl(S.mood+16);S.quality=cl(S.quality+4);S.energy=cl(S.energy-6);S.xp+=6;S.coins+=3;S.st.fixes+=2;say('Бағ ислоҳ шуд! Хатои 0',1);fx('🐛');fx('✨');SND.fix()},
+ sleep(){S.sleep=6;say('Хайр... zzz...',1);fx('💤');SND.sleep()}
+};
+function act(a){ACT[a]();$('#stage').classList.add('hit');setTimeout(()=>$('#stage').classList.remove('hit'),400);render();save()}
+$$('.acts .btn').forEach(b=>b.onclick=()=>act(b.dataset.a));
+addEventListener('keydown',e=>{if(/INPUT|SELECT/.test(e.target.tagName))return;const a={1:'coffee',2:'code',3:'fix',4:'sleep'}[e.key];if(a&&!S.sleep)act(a)});
+
+/* ---------- poke (hit the robot) ---------- */
+let pokes=[];
+$('#bot').addEventListener('pointerdown',()=>{
+ const n=Date.now();pokes=pokes.filter(t=>n-t<3500);pokes.push(n);S.st.hits++;S.mood=cl(S.mood-3);S.energy=cl(S.energy-1);
+ SND.ouch();$('#bot').parentElement.classList.add('hit');setTimeout(()=>$('#stage').classList.remove('hit'),450);
+ if(S.sleep>0){S.sleep=0;say('Ай! Чаро бедор кардӣ?!',1);fx('💢')}
+ else if(pokes.length>=5){S.mood=cl(S.mood-8);setTemp('angry',5000);say('Бас кун! Ман ҳам дард мекашам! 😠',1);fx('💢')}
+ else{setTemp('hurt',900);say(rnd(['Оҳ! Дард кард!','Ҳей! Чӣ кор мекунӣ?','Оу! Оҳиста!','Ин чӣ буд?!','Ай, нома!']),1);fx('💥')}
+ render();save();
+});
+/* eyes follow pointer */
+addEventListener('pointermove',e=>{if(S.sleep>0)return;const r=$('#bot').getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height*.38),d=Math.hypot(dx,dy)||1,k=Math.min(1,d/260);$('#eyes').style.transform=`translate(${dx/d*7*k}px,${dy/d*5*k}px)`});
+
+/* ---------- brain (voice/text chat) ---------- */
+const JOKES=['Чаро барномасоз ҳамеша хаста аст? Чунки ӯ бағҳоро аз шаб то субҳ меҷӯяд 😄','Баг не, ин хусусият аст!','Дар компютери ман кор мекунад! — Пас компютери туро ба муштарӣ медиҳем.','Барномасоз ба пешхизмат: «Як Java, лутфан». Пешхизмат: «Мо Python ҳам дорем».','Ду чиз бемаҳдуд аст: кайнот ва талаби муштарӣ. Дар бораи кайнот боварӣ надорам.'];
+const has=(t,w)=>w.some(x=>t.includes(x));
+function brain1(raw){
+ const t=raw.toLowerCase().replace(/ё/g,'е');S.st.chats++;
+ if(has(t,['қаҳва','каҳва','кофе','coffee','хӯрок','нон деҳ','ghahva','qahva'])){if(S.coffee>95)return'Ман аллакай пур аз қаҳва ҳастам ☕';act('coffee');return null}
+ if(has(t,['бихоб','хоб кун','ҳоб','спи','спать','sleep','истироҳат'])){act('sleep');return null}
+ if(has(t,['баг','ошибк','fix','ислоҳ'])&&has(t,['ислоҳ','исправ','fix','нест','убери','пок'])){act('fix');return null}
+ if(has(t,['код нависон','код кун','пиши код','напиши код','write code','нависон'])){act('code');return null}
+ if(S.energy<20&&!S.sleep)return'Ман хеле хастаам... Ба ман қаҳва деҳ ☕, баъд бо ҳам гап мезанем!';
+ const mt=t.match(/(-?\d+(?:[.,]\d+)?)\s*([+\-*/×÷:x])\s*(-?\d+(?:[.,]\d+)?)/);
+ if(mt){const a=parseFloat(mt[1].replace(',','.')),b=parseFloat(mt[3].replace(',','.')),o=mt[2];let r=o=='+'?a+b:o=='-'?a-b:/[*×x]/.test(o)?a*b:b?a/b:NaN;return isNaN(r)?'Ба сифр тақсим кардан мумкин нест! 😅':`${a} ${o} ${b} = ${+r.toFixed(4)}`}
+ if(has(t,['салом','привет','hello','hi ','ассалом','ҳай','hey']))return rnd(['Салом, девелопер! 👋','Ассалому алайкум! Хуш омадӣ!','Ҳей! Барои код нависӣ омадӣ?']);
+ if(has(t,['чӣ хел','чи хел','ахвол','аҳвол','как дела','how are','чӣ кор','хол чи']))return `Ман ${LOOKS[look].t.split(' ')[0].toLowerCase()} ҳастам. Энергия ${Math.round(S.energy)}%, кайфият ${Math.round(S.mood)}%.`;
+ if(has(t,['номат','исмат','номи ту','как тебя','your name','кистӣ','кистй','кто ты']))return'Ман Шиноби — питомеци девелопер! Бағҳоро мехӯрам ва қаҳва менӯшам 🤖';
+ if(has(t,['вақт','соат','время','time'])){return'Ҳозир соати '+new Date().toLocaleTimeString('tg-TJ',{hour:'2-digit',minute:'2-digit'})+' аст.'}
+ if(has(t,['сана','таърих','санаи','дата','date','имрӯз','сегодня']))return'Имрӯз '+new Date().toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'})+' аст.';
+ if(has(t,['шӯхӣ','шухи','анекдот','шутк','joke','хандон']))return rnd(JOKES);
+ if(has(t,['раҳмат','рахмат','спасибо','thank','ташаккур']))return rnd(['Марҳамат! 😊','Ҳамеша ба хизмат!']);
+ if(has(t,['офарин','молодец','зўр','зур','бисёр хуб','хуб кор','аъло','good bot']))return'Ташаккур! Шумо маро хурсанд кардед 😍';
+ if(has(t,['беақл','дурак','тупой','stupid','бад','бемаъно'])){S.mood=cl(S.mood-10);setTemp('angry',3500);return'Ин нодуруст аст! Ман ранҷидам 😠'}
+ if(has(t,['дӯст медорам','люблю','love']))return'Ман ҳам шуморо дӯст медорам, дӯсти девелопер! ❤️';
+ if(has(t,['чӣ карда','чи кор карда','кумак','помощ','help','метавонӣ']))return'Ман метавонам: гап занам, ҳисоб кунам, шӯхӣ кунам, вақтро гӯям. Бигӯед «қаҳва деҳ», «код нависон», «бағро ислоҳ кун» ё «бихоб». Ба ман даст занед ҳам!';
+ if(has(t,['худо','хайр','пока','bye','то дидор']))return'То дидор! Барвақттар баргардед ☕';
+ if(has(t,['кӣ сохт','кто создал','who made']))return'Маро як барномасози боистеъдод бо ёрии нейросетҳо сохт 🚀';
+ return rnd(['Ин -ро хуб нафаҳмидам. Аз ман вақтро, шӯхиро ё ҳисобро пурсед.','Ҳмм, ҷолиб! Бигӯед «кумак» то бубинед, ман чӣ кор карда метавонам.'])+(S.energy<40?' Ва каме қаҳва ҳам нарасад 😉':'');
+}
+function msg(c,t){const d=document.createElement('div');d.className='m '+c;d.textContent=t;$('#msgs').appendChild(d);$('#msgs').scrollTop=1e5}
+function handle(text){
+ text=text.trim();if(!text)return;msg('u',text);
+ setTimeout(()=>{const r=brain(text);if(r){msg('b',r);say(r,true,1)}else{const b=$('#bubble').textContent;msg('b',b)}render();save()},350);
+}
+$('#send').onclick=()=>{handle($('#txt').value);$('#txt').value=''};
+$('#txt').onkeydown=e=>{if(e.key==='Enter')$('#send').click()};
+$('#chips').innerHTML=['Салом','Чӣ хел аҳвол?','Шӯхӣ кун','Вақт чанд аст?','12 * 7','Қаҳва деҳ','Кумак'].map(c=>`<button>${c}</button>`).join('');
+$$('#chips button').forEach(b=>b.onclick=()=>handle(b.textContent));
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+$('#mic').onclick=()=>{
+ if(!SR){msg('b','Браузери шумо шиносоии овозро дастгирӣ намекунад. Chrome ё Edge истифода баред, ё матн нависед.');return}
+ try{speechSynthesis.cancel()}catch(e){}
+ const r=new SR();r.lang=$('#lang').value;r.interimResults=false;r.maxAlternatives=1;
+ r.onstart=()=>{$('#mic').classList.add('on');setTemp('listen',9000);say('Гӯш мекунам... 👂')};
+ r.onresult=e=>{temp=null;handle(e.results[0][0].transcript)};
+ r.onerror=e=>{temp=null;render();msg('b',e.error==='not-allowed'?'Иҷозати микрофон лозим аст.':e.error==='language-not-supported'?'Ин забон дастгирӣ намешавад. Забони «Русский» ё «English»-ро санҷед.':'Нашунидам. Боз кӯшиш кунед.')};
+ r.onend=()=>{$('#mic').classList.remove('on');temp=null;render()};
+ try{r.start()}catch(e){}
+};
+if(S.name)msg('b',`Хуш омадӣ, ${S.name}! Ман ${S.bn}, нинзяи рақамӣ 🥷 Ҳар чизеро, ки бигӯӣ, дар хотир мегирам.`);
+
+/* ---------- memory, name, knowledge ---------- */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const N0=t=>S.name?S.name+', '+t.charAt(0).toLowerCase()+t.slice(1):t;
+const nm=t=>S.name&&!/^(Салом|Хуш)/.test(t)?N0(t):t;
+function setName(n){S.name=cap(n.trim());save()}
+function wave(ms){const s=$('#stage');s.classList.add('wave');setTimeout(()=>s.classList.remove('wave'),ms)}
+function askName(){$('#welcome').classList.add('on');say('Номи ту чист?');setTimeout(()=>$('#nm').focus(),60)}
+function okName(){const v=$('#nm').value.trim();if(v.length<2){$('#nm').focus();return}setName(v);$('#nm').value='';$('#welcome').classList.remove('on');
+ const g=`Салом, ${S.name}! Ман ${S.bn}. Аз ин ба баъд ҳар чизеро, ки бигӯӣ, дар хотир мегирам 🥷`;msg('b',g);say(g,true,1);wave(4500);SND.win();render();drawAll();save()}
+$('#okn').onclick=okName;$('#nm').onkeydown=e=>{if(e.key==='Enter')okName()};
+let learned=null;
+const NOTN=['хаста','хурсанд','гурусна','асабӣ','бад','хуб','ту','шумо','барномасоз','донишҷӯ','муаллим','духтур','муҳандис','дизайнер','девелопер','толиб'];
+function remember(raw){
+ S.mem.push({t:Date.now(),x:raw});if(S.mem.length>150)S.mem.shift();
+ const F=S.facts;let m;learned=null;
+ if((m=raw.match(/(?:номи ман|номам|меня зовут|my name is|ismi man|nomi man)\s+([\p{L}'\-]{2,})/iu)||raw.match(/^\s*ман\s+([\p{L}'\-]{2,})\s+ҳастам/iu))&&!NOTN.includes(m[1].toLowerCase())){setName(m[1]);learned=`Хуш омадӣ, ${S.name}! Номатро дар хотир гирифтам.`}
+ else if(m=raw.match(/(\d{1,2})\s*(?:сола|сол дорам|лет|года|years? old)/i)){F.age=m[1];learned=`Дар хотир гирифтам: ту ${m[1]} солаӣ.`}
+ else if(m=raw.match(/(?:ман аз|я из|i am from|i'm from)\s+([\p{L}\-]{2,})/iu)){F.from=cap(m[1]);learned=`Дар хотир гирифтам: ту аз ${F.from} ҳастӣ.`}
+ else if(m=raw.match(/ман\s+(барномасоз|донишҷӯ|муаллим|духтур|муҳандис|дизайнер|девелопер|толиб)/iu)){F.job=m[1].toLowerCase();learned=`Дар хотир гирифтам: ту ${F.job} ҳастӣ.`}
+ else if(m=raw.match(/рангӣ?\s+дӯстдоштаи\s+ман\s+([\p{L}\-]{2,})/iu)){F.color=m[1];learned=`Рангӣ дӯстдоштаи туро дар хотир гирифтам: ${m[1]}.`}
+ else if(m=raw.match(/(?:дар хотир дор|ба ёд дор|запомни|remember)[:,]?\s*(.{2,120})/iu)){F.notes.push(m[1]);learned='Хуб, дар хотир гирифтам: «'+m[1]+'».'}
+ else if((m=raw.match(/(?:ман\s+)?(.{2,40}?)(?:-?ро)?\s+дӯст медорам/iu)||raw.match(/(?:я люблю|i (?:like|love))\s+(.{2,40})/iu))&&!/туро|шуморо|тебя|you/i.test(raw)){const l=m[1].trim();if(!F.likes.includes(l))F.likes.push(l);learned=`Дар хотир гирифтам, ки ту «${l}»-ро дӯст медорӣ.`}
+ save();
+}
+function memIntent(t){
+ if(learned){const l=learned;learned=null;return l}
+ const F=S.facts;
+ if(has(t,['чӣ дар хотир','чи дар хотир','что ты помнишь','what do you remember','дар бораи ман чӣ','маро медонӣ'])){
+  const p=[];if(S.name)p.push('номи ту '+S.name);if(F.age)p.push(F.age+' солаӣ');if(F.from)p.push('аз '+F.from);if(F.job)p.push(F.job);if(F.color)p.push('ранги дӯстдошта '+F.color);if(F.likes.length)p.push('дӯст медорӣ: '+F.likes.join(', '));if(F.notes.length)p.push('қайдҳо: '+F.notes.join('; '));
+  return p.length?'Ман дар хотир дорам: '+p.join(', ')+'.':'Ҳоло чизе намедонам. Дар бораи худат нақл кун!'}
+ if(has(t,['номи ман чист','номи маро','my name','мое имя','номам чист']))return S.name?`Номи ту ${S.name} аст!`:'Ту ҳоло номатро нагуфтӣ. Номат чист?';
+ if(has(t,['чанд сола','синну сол','сколько мне','how old am i']))return F.age?`Ту ${F.age} солаӣ.`:'Синну солатро нагуфтӣ. Чанд солаӣ?';
+ if(has(t,['аз куҷо ҳастам','откуда я','where am i from']))return F.from?`Ту аз ${F.from} ҳастӣ.`:'Нагуфтӣ, ки аз куҷо ҳастӣ.';
+ if(has(t,['чӣ дӯст медорам','что я люблю','what do i like']))return F.likes.length?'Ту дӯст медорӣ: '+F.likes.join(', ')+'.':'Ҳоло нагуфтӣ, ки чиро дӯст медорӣ.';
+ if(has(t,['чӣ гуфтам','чи гуфтам','что я сказал','what did i say'])){const p=S.mem[S.mem.length-2];return p?`Пештар ту гуфтӣ: «${p.x}».`:'Ҳанӯз чизе нагуфтӣ.'}
+ if(has(t,['фаромӯш кун','забудь','forget'])){S.mem=[];S.facts={likes:[],notes:[]};S.name='';save();askName();return'Ҳамаро фаромӯш кардам. Боз ошно шавем!'}
+ if(has(t,['номат','исмат','номи ту','как тебя','your name','кистӣ','кто ты']))return `Номи ман ${S.bn}, нинзяи рақамӣ! ${S.name?'Номи ту '+S.name+' аст, дар хотирам ҳаст.':'Номи ту чист?'}`;
+ return null}
+const KB=[
+['офтоб|солнце|sun|хуршед','Офтоб ситораест, ки аз мо тақрибан 150 миллион км дур аст. Нури ӯ ба Замин дар 8 дақиқа мерасад.'],
+['сайёра|планета|planet','Дар Низоми Офтобӣ 8 сайёра ҳаст: Меркурий, Зӯҳра, Замин, Миррих, Муштарӣ, Зуҳал, Уран ва Нептун.'],
+['h2o|вода|water|формулаи об','Формулаи оби тоза H₂O аст: ду атоми гидроген ва як атоми оксиген. Об дар 100°C ҷӯш мезанад.'],
+['ҷозиба|гравитац|gravity|ньютон','Нерӯи ҷозиба ҷисмҳоро ба якдигар мекашад. Дар Замин тезонии ҷисми афтанда тақрибан 9,8 м/с² аст.'],
+['фотосинтез|photosynth','Растаниҳо бо нури офтоб, об ва газҳои CO₂ қанд месозанд ва оксиген хориҷ мекунанд. Ин ҷараён фотосинтез аст.'],
+['суръати нур|скорость света|speed of light','Суръати нур дар вакуум тақрибан 300 000 км дар сония аст.'],
+['днк|dna','ДНК молекулаест, ки маълумоти ирсии ҳар мавҷудро нигоҳ медорад. Шакли он ҳалқаи дукарата аст.'],
+['атом|atom','Атом аз ядро (протон ва нейтрон) ва электронҳо иборат аст. Ҳамаи моддаҳо аз атомҳо сохта шудаанд.'],
+['пойтахт|столиц|capital|душанбе','Пойтахти Тоҷикистон шаҳри Душанбе аст.'],
+['мустақил|независимост|independence','Тоҷикистон 9 сентябри соли 1991 мустақил шуд.'],
+['рӯдакӣ|рудаки|rudaki','Абӯабдуллоҳи Рӯдакӣ (тақрибан 858–941) бунёдгузори адабиёти форсу тоҷик аст.'],
+['ибни сино|авиценн|сино','Ибни Сино (980–1037) табиб ва файласуф буд. Китоби «Қонун дар тib»-и ӯ асрҳо дар Аврупо хонда мешуд.'],
+['хоразмӣ|хорезми|алгоритм|algorithm','Хоразмӣ (тақрибан 780–850) олими математик буд ва калимаи «алгоритм» аз номи ӯст.'],
+['пифагор|pythagor','Теоремаи Пифагор: дар секунҷаи росткунҷа a² + b² = c², ки c — гипотенуза аст.'],
+['π|число пи|значение пи|pi ','π тақрибан 3,14159 аст: таносуби дарозии давра ба диаметраш.'],
+['синну соли замин|возраст земли|age of earth','Синну соли Замин тақрибан 4,5 миллиард сол аст.'],
+['моҳ|луна|moon','Моҳ ҳамсафари Замин аст. Масофа то он тақрибан 384 000 км мебошад. Моҳ нури худро надорад, нури офтобро инъикос мекунад.'],
+['бинарӣ|двоичн|binary|системаи дуӣ','Компютер танҳо 0 ва 1-ро мефаҳмад: ин системаи дуӣ аст. Масалан, рақами 5 дар он 101 навишта мешавад.'],
+['html|css|javascript|питон|python','HTML сохтори сайтро месозад, CSS намуди онро, JavaScript рафторашро. Python забони осон барои AI ва таҳлили маълумот аст.'],
+['нейросет|нейрон|искусственный|artificial|ai ','Нейросет модели компютерист, ки аз миқдори зиёди маълумот меомӯзад ва метавонад матн нависад, расм кашад ва савол ҷавоб диҳад.'],
+['исмоили сомонӣ|помир|pamir','Қуллаи Исмоили Сомонӣ дар Помир 7495 метр баландӣ дорад: баландтарин қуллаи Тоҷикистон.'],
+['эйнштейн|einstein|нисбият','Эйнштейн назарияи нисбиятро офарид. Формулаи машҳури ӯ E = mc² аст.'],
+['дил|сердце|heart','Дили инсон дар як дақиқа тақрибан 60–100 бор мезанад ва хунро ба тамоми бадан мефиристад.'],
+['устухон|кост|bone','Бадани калонсол 206 устухон дорад.']];
+function kbIntent(t){if(has(t,['далел','факт','дониста буд','fact','интересное']))return rnd(KB)[1];const k=KB.find(e=>has(t,e[0].split('|')));return k?k[1]:null}
+function brain(raw){
+ const t=raw.toLowerCase().replace(/ё/g,'е');remember(raw);
+ const cmd=has(t,['қаҳва','каҳва','кофе','coffee','бихоб','хоб кун','спи','sleep']);
+ if(S.energy<20&&!S.sleep&&!cmd){learned=null;S.st.chats++;return N0('Ман хеле хастаам... Ба ман қаҳва деҳ ☕, баъд гап мезанем!')}
+ let r=memIntent(t)||kbIntent(t);if(r){S.st.chats++;return nm(r)}
+ r=brain1(raw);return r?nm(r):r;
+}
+$('#fact').onclick=()=>{const k=rnd(KB)[1];msg('b',k);say(k,true,1);wave(2500)};
+
+/* quiz */
+const QZ=[['Пойтахти Тоҷикистон кадом шаҳр аст?',['Хуҷанд','Душанбе','Ӯротеппа'],1],['Формулаи оби тоза кадом аст?',['CO₂','H₂O','O₂'],1],['Дар Низоми Офтобӣ чанд сайёра ҳаст?',['7','8','9'],1],['Суръати нур тақрибан чанд аст?',['300 000 км/с','3 000 км/с','30 000 км/с'],0],['Китоби «Қонун дар тib»-ро кӣ навиштааст?',['Рӯдакӣ','Ибни Сино','Хоразмӣ'],1],['Рақами 5 дар системаи дуӣ чӣ тавр навишта мешавад?',['101','110','11'],0],['Растаниҳо кадом газро ҷаббида, оксиген хориҷ мекунанд?',['Азот','CO₂','Гидроген'],1],['Бадани калонсол чанд устухон дорад?',['106','206','306'],1],['Баландтарин қуллаи Тоҷикистон кадом аст?',['Эверест','Қуллаи Исмоили Сомонӣ','Монблан'],1],['JavaScript дар сайт барои чӣ истифода мешавад?',['Барои рафтори сайт','Танҳо барои расм','Барои хотираи компютер'],0],['π тақрибан ба чанд баробар аст?',['2,14','3,14','4,13'],1],['Калимаи «алгоритм» аз номи кадом олим пайдо шудааст?',['Хоразмӣ','Эйнштейн','Ньютон'],0]];
+let Q=null;
+function drawQ(){const e=$('#qz');
+ if(!Q){e.innerHTML='<button class="go" id="qs" style="height:46px;width:100%">▶ Оғози викторина</button>';$('#qs').onclick=()=>{Q={i:0,sc:0,d:0,l:[...QZ].sort(()=>Math.random()-.5).slice(0,5)};drawQ()};return}
+ if(Q.i>=5){const r=Q.sc;e.innerHTML=`<div class="it"><div class="e">${r>=4?'🏆':r>=2?'👍':'📚'}</div><b>${r} аз 5</b><small>+${r*5} танга</small></div><button class="go" id="qs" style="height:46px;width:100%;margin-top:10px">Боз бозӣ кардан</button>`;$('#qs').onclick=()=>{Q=null;drawQ()};return}
+ const q=Q.l[Q.i];e.innerHTML=`<p class="sub">Савол ${Q.i+1} / 5 · Хол: ${Q.sc}</p><h2 style="font-size:17px;margin-bottom:12px">${q[0]}</h2>`+q[1].map((o,i)=>`<button class="qo" data-i="${i}">${o}</button>`).join('');
+ $$('.qo').forEach(b=>b.onclick=()=>{if(Q.d)return;Q.d=1;const ok=+b.dataset.i===q[2];b.classList.add(ok?'ok':'no');$$('.qo')[q[2]].classList.add('ok');
+  if(ok){Q.sc++;S.coins+=5;S.xp+=3;SND.win();say(N0('Дуруст! Офарин! 🎉'),true,1)}else{SND.deny();say(N0('Нодуруст. Ҷавоби дуруст: '+q[1][q[2]]),true,1)}
+  render();save();setTimeout(()=>{Q.i++;Q.d=0;drawQ()},1600)})}
+
+/* memory pane */
+function drawMem(){const F=S.facts;
+ $('#mf').innerHTML=[['Ном',S.name],['Синну сол',F.age],['Аз',F.from],['Касб',F.job],['Ранг',F.color],['Дӯст дорад',F.likes.join(', ')]].map(([n,v])=>`<div><b style="font-size:14px">${esc(v||'—')}</b><span>${n}</span></div>`).join('');
+ $('#ml').innerHTML=(F.notes.map(n=>`<div class="m b" style="margin-bottom:6px;max-width:100%">📝 ${esc(n)}</div>`).join('')+S.mem.slice(-12).reverse().map(m=>`<div class="m u" style="max-width:100%;align-self:auto;margin:0 0 6px">${esc(m.x)}</div>`).join(''))||'<p class="sub">Хотира холӣ аст.</p>'}
+$('#bnb').onclick=()=>{const v=$('#bn').value.trim();if(v.length<2)return;S.bn=cap(v);$('.logo').textContent='🥷 '+S.bn;$('#bn').value='';toast('Номи нав: '+S.bn);save()};
+$('#clr').onclick=()=>{if(!confirm('Хотира тоза шавад?'))return;S.mem=[];S.facts={likes:[],notes:[]};S.name='';save();drawMem();askName()};
+
+/* ---------- live voice conversation ---------- */
+let live=false,rec=null;
+function stopRec(){try{if(rec){rec.onend=null;rec.abort()}}catch(e){}rec=null}
+function sync(){$('#mic').classList.toggle('on',live);$('#live').textContent=live?'⏹ Қатъи гӯш кардан':'🎧 Гуфтугӯи зинда'}
+function startRec(){
+ if(!live||talking)return;
+ if(!SR){live=false;sync();msg('b','Браузери шумо шиносоии овозро дастгирӣ намекунад. Chrome ё Edge истифода баред.');return}
+ stopRec();const r=new SR();rec=r;r.lang=$('#lang').value;r.interimResults=true;r.maxAlternatives=1;
+ r.onstart=()=>setTemp('listen',9000);
+ r.onresult=e=>{let fin='',im='';for(let i=e.resultIndex;i<e.results.length;i++){const x=e.results[i];if(x.isFinal)fin+=x[0].transcript;else im+=x[0].transcript}
+  if(im&&!fin)$('#bubble').textContent='🎤 '+im;
+  if(fin.trim()){temp=null;handle(fin)}};
+ r.onerror=e=>{
+  if(e.error==='not-allowed'||e.error==='service-not-allowed'){live=false;sync();msg('b','Иҷозати микрофон лозим аст. Микрофонро дар браузер иҷозат диҳед. Сайт бояд бо https ё localhost кушода шавад.')}
+  else if(e.error==='language-not-supported'){$('#lang').value='ru-RU';toast('Тоҷикӣ дастгирӣ намешавад: забони русӣ фаъол шуд')}};
+ r.onend=()=>{if(rec===r){rec=null;temp=null;render();if(live&&!talking)setTimeout(startRec,300)}};
+ try{r.start()}catch(e){setTimeout(startRec,600)}
+}
+function toggleLive(){live=!live;sync();if(live){try{speechSynthesis.cancel()}catch(e){}startRec();toast('🎧 Гӯш мекунам. Гап занед!')}else{stopRec();temp=null;render()}}
+$('#mic').onclick=toggleLive;$('#live').onclick=toggleLive;
+
+/* ---------- tabs ---------- */
+$$('.tab').forEach(b=>b.onclick=()=>{$$('.tab').forEach(x=>x.classList.toggle('on',x===b));$$('.pane').forEach(p=>p.classList.toggle('on',p.id==='p-'+b.dataset.t));drawAll()});
+
+/* ---------- mini game ---------- */
+let G=null;
+$('#gb').textContent='Беҳтарин: '+S.st.best;
+$('#gstart').onclick=()=>{
+ if(G)return;if(S.energy<10||S.sleep){toast('Энергия кам аст. Қаҳва деҳед!');SND.deny();return}
+ S.energy-=10;let sc=0,tm=20;const ar=$('#arena');ar.innerHTML='';$('#gs').textContent='Хол: 0';
+ const sp=setInterval(()=>{const b=document.createElement('span');b.className='bug';b.textContent=rnd(['🐛','🐞','🪲']);b.style.left=Math.random()*(ar.clientWidth-44)+'px';b.style.top=Math.random()*(ar.clientHeight-44)+'px';
+  b.onpointerdown=()=>{sc++;$('#gs').textContent='Хол: '+sc;b.remove();beep(500+sc*15,.07,'triangle')};ar.appendChild(b);setTimeout(()=>b.remove(),950)},620);
+ const ti=setInterval(()=>{tm--;$('#gt').textContent=tm+'с';if(tm<=0){clearInterval(sp);clearInterval(ti);G=null;ar.innerHTML='';
+  S.coins+=sc;S.xp+=sc*2;S.mood=cl(S.mood+sc);S.st.best=Math.max(S.st.best,sc);$('#gb').textContent='Беҳтарин: '+S.st.best;$('#gt').textContent='20с';
+  toast(`🎮 ${sc} баг! +${sc} танга`);say(`Бозӣ тамом шуд: ${sc} баг!`,1);SND.win();render();save()}},1000);
+ G=1;render();
+};
+
+/* ---------- shop ---------- */
+const SK={v:['Бунафш','#8b7bff','#e9e6ff',0],c:['Фирӯзаранг','#2fd6e0','#dffbff',60],o:['Норанҷӣ','#ff8a4c','#fff0e4',120],g:['Тиллоӣ','#f5c542','#fff7d6',250],p:['Гулобӣ','#ff6fb5','#ffe6f3',180]};
+function skin(k){const s=SK[k];document.documentElement.style.setProperty('--ac',s[1]);document.documentElement.style.setProperty('--sh',s[2])}
+function drawShop(){$('#skins').innerHTML=Object.entries(SK).map(([k,s])=>`<div class="it ${S.skin===k?'cur':''}"><div class="sw" style="background:${s[1]}"></div><b>${s[0]}</b><small>${S.own.includes(k)?(S.skin===k?'Фаъол':'Харидорӣ шуд'):'🪙 '+s[3]}</small><button class="b2" data-k="${k}">${S.own.includes(k)?'Истифода':'Харидан'}</button></div>`).join('');
+ $$('#skins .b2').forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(!S.own.includes(k)){if(S.coins<SK[k][3]){toast('Тангаҳо кифоя нест 🪙');SND.deny();return}S.coins-=SK[k][3];S.own.push(k);SND.win()}S.skin=k;skin(k);render();save();drawShop()})}
+skin(S.skin);
+
+/* ---------- achievements & stats ---------- */
+const AC=[['☕','Аввалин қаҳва',s=>s.st.coffee>=1],['💻','Коди аввал',s=>s.st.code>=1],['⌨️','Кодер (10 код)',s=>s.st.code>=10],['🐛','Шикорчии баг (10)',s=>s.st.fixes>=10],['👋','Ба ӯ даст занед (10)',s=>s.st.hits>=10],['💬','Суханрон (5 паём)',s=>s.st.chats>=5],['🎮','Бозигар (15 хол)',s=>s.st.best>=15],['🚀','Сатҳи 3',s=>s.xp>=120],['💰','100 танга',s=>s.coins>=100]];
+function checkAch(){AC.forEach(([e,n,f],i)=>{if(!S.ach[i]&&f(S)){S.ach[i]=1;toast(`🏆 Дастоварди нав: ${n}`);SND.win();save()}})}
+function drawAll(){drawMem();drawQ();
+ drawShop();
+ $('#achc').textContent=`Кушода шуд: ${Object.keys(S.ach).length} аз ${AC.length}`;
+ $('#achs').innerHTML=AC.map(([e,n],i)=>`<div class="it ${S.ach[i]?'':'lock'}"><div class="e">${S.ach[i]?e:'🔒'}</div><b>${n}</b></div>`).join('');
+ const st=S.st;$('#kp').innerHTML=[['Қаҳва',st.coffee],['Код',st.code],['Багҳо',st.fixes],['Зарбаҳо',st.hits],['Паёмҳо',st.chats],['Вақт',Math.floor(S.t/60)+'д']].map(([n,v])=>`<div><b>${v}</b><span>${n}</span></div>`).join('');
+ const h=S.hist.length?S.hist:[50,50];$('#line').setAttribute('points',h.map((v,i)=>`${(i/(h.length-1))*300},${88-v*.84}`).join(' '));
+}
+
+/* ---------- timer: stats decay ---------- */
+const IDLE=['Дилам танг шуд...','Кай код менависем?','Бағҳо дар ҳамсоя ҳастанд 👀','Ба ман даст занед!','Бо ман гап занед 🎤'];
+setInterval(()=>{
+ S.t++;
+ if(S.sleep>0){S.sleep--;S.energy=cl(S.energy+9);S.mood=cl(S.mood+3);S.coffee=cl(S.coffee-.2);S.quality=cl(S.quality+.3);if(!S.sleep){say('Субҳ ба хайр! Энергия пур шуд ⚡',1);fx('☀️');SND.coffee()}}
+ else{S.coffee=cl(S.coffee-.7);S.energy=cl(S.energy-(S.coffee<20?.9:.4));S.mood=cl(S.mood-(.3+S.bugs*.08));S.quality=cl(S.quality-S.bugs*.03);
+  if(S.t%12===0){if(S.energy<25||S.coffee<20){say(N0('Ба ман қаҳва деҳ! ☕'),true,1)}else if(S.bugs>5)say('Ин қадар баг?! Ислоҳ кун!');else say(N0(rnd(IDLE)))}}
+ if(S.t%4===0){S.hist.push(Math.round((S.energy+S.mood+S.quality+S.coffee)/4));if(S.hist.length>60)S.hist.shift()}
+ render();if(S.t%5===0){save();if($('#p-stat').classList.contains('on'))drawAll()}
+},1000);
+$('#mute').onclick=e=>{muted=!muted;if(muted)try{speechSynthesis.cancel()}catch(x){}e.target.textContent=muted?'🔇 Хомӯш':'🔊 Садо'};
+$('#reset').onclick=()=>{if(!confirm('Ҳамаи маълумот тоза шавад?'))return;S=JSON.parse(JSON.stringify(DEF));skin('v');look='';lastLv=1;render();drawAll();save();say('Аз нав оғоз шуд!');askName()};
+try{speechSynthesis.getVoices()}catch(e){}
+$('.logo').textContent='🥷 '+S.bn;
+if(S.name){say(`Хуш омадӣ, ${S.name}!`);setTimeout(()=>wave(3000),700)}else askName();
+setInterval(()=>{if(!S.sleep&&!G&&!talking)wave(2200)},14000);
+render();drawAll();
+</script>
+</body>
+</html>
